@@ -18,7 +18,7 @@ import sys
 PY3 = sys.version_info[0] == 3
 
 
-def bin2c(filename, varname='data', linesize=80, indent=4):
+def bin2c(filename, varname='data', vartype='char', linesize=80, indent=4):
     """ Read binary data from file and return as a C array
 
     :param filename: a filename of a file to read.
@@ -38,7 +38,7 @@ def bin2c(filename, varname='data', linesize=80, indent=4):
     if linesize < 40:
         linesize = 40
     byte_len = 6  # '0x00, '
-    out = 'const char %s[%d] = {\n' % (varname, len(data))
+    out = 'const %s %s[%d] = {\n' % (vartype, varname, len(data))
     line = ''
     for byte in data:
         line += '0x%02x, ' % (byte if PY3 else ord(byte))
@@ -62,12 +62,14 @@ def main():
     parser.add_argument(
         'varname', nargs='?', help='variable name', default='data')
     parser.add_argument(
+        'vartype', nargs='?', help='variable type', default='char')
+    parser.add_argument(
         'linesize', nargs='?', help='line length', default=80, type=int)
     parser.add_argument(
         'indent', nargs='?', help='indent size', default=4, type=int)
     args = parser.parse_args()
     # print out the data
-    print(bin2c(args.filename, args.varname, args.linesize, args.indent))
+    print(bin2c(args.filename, args.varname, args.vartype, args.linesize, args.indent))
 
 
 if __name__ == '__main__':
