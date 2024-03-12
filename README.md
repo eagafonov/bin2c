@@ -8,6 +8,7 @@ usage: bin2c.py [-h] filename [varname] [linesize] [indent]
 positional arguments:
   filename    filename to convert to C array
   varname     variable name
+  vartype     data type
   linesize    line length
   indent      indent size
 
@@ -17,8 +18,8 @@ optional arguments:
 
 #### Example:
 
-`./bin2c.py img.png my_img 80 4`  
-or simply  
+`./bin2c.py img.png my_img char 80 4`
+or simply
 `./bin2c.py img.png my_img`
 
 This will print out to console a C array with variable name `my_img` limited to `80` characters per line, with `4` spaces indent:

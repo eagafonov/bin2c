@@ -23,6 +23,7 @@ def bin2c(filename, varname='data', vartype='char', linesize=80, indent=4):
 
     :param filename: a filename of a file to read.
     :param varname: a C array variable name.
+    :param vartype: a byte-size type for data (default is char).
     :param linesize: a size of a line (min value is 40).
     :param indent: an indent (number of spaces) that prepend each line.
     """
